@@ -1,5 +1,13 @@
 package com.techakademia.userinterface;
 
+import com.techakademia.model.Student;
+import com.techakademia.service.StudentService;
+import com.techakademia.util.ValidationUtil;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -45,7 +53,6 @@ public class UserInterface {
                     viewInstructorsUI();
                     break;
                 case 8:
-                    System.out.println("selected 8");
                     return;
                 default:
                     System.out.println("invalid selection");
@@ -64,10 +71,16 @@ public class UserInterface {
         System.out.print("Enter Last Name:\t");
         String lastName = src.next();
         System.out.print("Enter Date of Birth (YYYY-MM-DD):\t");
-        String dob = src.next();
+        String date = src.next();
+        LocalDate dob = ValidationUtil.convertToDate(date);
+        src.nextLine();
         System.out.print("Enter Address:\t");
-        String address = src.next();
+        String address = src.nextLine();
         System.out.println("-------------------------------------");
+
+        Student student = new Student(firstName, middleName, lastName, address, dob);
+
+        StudentService.addStudent(student);
 
     }
     private static void viewStudentsUI(){

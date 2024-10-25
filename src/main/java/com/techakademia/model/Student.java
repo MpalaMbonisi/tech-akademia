@@ -1,13 +1,17 @@
 package com.techakademia.model;
 
-import java.util.Objects;
+import com.techakademia.util.ValidationUtil;
+
+import java.time.LocalDate;
+import java.util.Date;
 
 public class Student {
     private String firstName;
     private String middleName;
     private String lastName;
     private String address;
-    private String dob;
+    private LocalDate dob;
+    private String email;
 
     public String getFirstName() {
         return firstName;
@@ -41,21 +45,26 @@ public class Student {
         this.address = address;
     }
 
-    public String getDob() {
+    public LocalDate getDob() {
         return dob;
     }
 
-    public void setDob(String dob) {
+    public void setDob(LocalDate dob) {
         this.dob = dob;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
     public Student(String firstName, String middleName,
-                   String lastName, String address, String dob){
+                   String lastName, String address, LocalDate dob){
         this.firstName = firstName;
         this.lastName = lastName;
-        this.middleName = (middleName.isEmpty()) ? null : middleName;
+        this.middleName =  middleName;
         this.address = address;
         this.dob = dob;
+        this.email = ValidationUtil.generateEmail(firstName, lastName);
     }
 
 }
