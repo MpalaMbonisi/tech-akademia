@@ -1,70 +1,60 @@
 package com.techakademia.model;
 
-import com.techakademia.util.ValidationUtil;
-
-import java.time.LocalDate;
-import java.util.Date;
-
 public class Student {
-    private String firstName;
-    private String middleName;
-    private String lastName;
-    private String address;
-    private LocalDate dob;
+    private int studentId;
+    private final String firstName;
+    private final String middleName;
+    private final String lastName;
     private String email;
+    private final String dob;
+    private String date_enrolled;
+
+    public String getDate_enrolled() {
+        return date_enrolled;
+    }
+
+    public int getStudentId() {
+        return studentId;
+    }
 
     public String getFirstName() {
         return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getMiddleName() {
-        return middleName;
-    }
-
-    public void setMiddleName(String middleName) {
-        this.middleName = middleName;
     }
 
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public LocalDate getDob() {
-        return dob;
-    }
-
-    public void setDob(LocalDate dob) {
-        this.dob = dob;
+    public String getMiddleName() {
+        return middleName;
     }
 
     public String getEmail() {
         return email;
     }
 
-    public Student(String firstName, String middleName,
-                   String lastName, String address, LocalDate dob){
+    public String getDob() {
+        return dob;
+    }
+
+
+
+    public Student(String firstName, String middleName, String lastName, String dob) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.middleName =  middleName;
-        this.address = address;
+        this.middleName = middleName;
         this.dob = dob;
-        this.email = ValidationUtil.generateEmail(firstName, lastName);
     }
+
+    public Student(int studentId, String firstName, String middleName, String lastName, String email, String dob, String date_enrolled) {
+        this.studentId = studentId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.middleName = middleName;
+        this.email = email;
+        this.dob = dob;
+        this.date_enrolled = date_enrolled;
+    }
+
 
 }

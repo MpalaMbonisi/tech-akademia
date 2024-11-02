@@ -1,47 +1,44 @@
 package com.techakademia.model;
 
 public class Course {
-    private String courseName;
-    private String description;
-    private int credits;
-    private int instructorID;
+    private final String name;
+    private final String description;
+    private final int credits;
+    private final String instructorFirstName;
 
-    public String getCourseName() {
-        return courseName;
-    }
+    private final String instructorLastName;
+    private final String instructorTitle;
 
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
+    public String getName() {
+        return name;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public int getCredits() {
         return credits;
     }
 
-    public void setCredits(int credits) {
-        this.credits = credits;
+    public String getInstructorFirstName() {
+        return instructorFirstName;
     }
 
-    public int getInstructorID() {
-        return instructorID;
+    public String getInstructorLastName() {
+        return instructorLastName;
     }
 
-    public void setInstructorID(int instructorID) {
-        this.instructorID = instructorID;
+    public String getInstructorTitle() {
+        return instructorTitle;
     }
 
-    public Course(String courseName, String description, int credits, int instructorID) {
-        this.courseName = courseName;
+    public Course(String name, String description, int credits, String instructorTitle, String instructorFirstName, String instructorLastName) {
+        this.name = name;
         this.description = description;
         this.credits = credits;
-        this.instructorID = instructorID;
+        this.instructorFirstName = instructorFirstName;
+        this.instructorLastName = instructorLastName;
+        this.instructorTitle = instructorTitle;
     }
 }
