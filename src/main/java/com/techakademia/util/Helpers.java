@@ -1,10 +1,6 @@
 package com.techakademia.util;
 
-import com.techakademia.model.Student;
-
 import java.sql.*;
-import java.text.DateFormat;
-import java.time.LocalDate;
 
 public class Helpers {
     public static String generateEmail(String lastName){

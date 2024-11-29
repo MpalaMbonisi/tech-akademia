@@ -29,8 +29,8 @@ public class CourseDAO {
     public static List<Course> getAllCourses(){
         Connection con = DatabaseConnection.getConnection();
         String sql = "select c.course_name, c.description, c.credits, i.first_name, i.last_name, i.education_title " +
-                    " from courses as c " +
-                    "join instructors as i on c.instructor_id = i.instructor_id";
+                " from courses as c " +
+                "join instructors as i on c.instructor_id = i.instructor_id";
         List<Course> coursesList = new ArrayList<>();
         try {
 
