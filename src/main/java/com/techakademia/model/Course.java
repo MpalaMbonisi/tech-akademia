@@ -57,4 +57,12 @@ public class Course {
                 ", instructor = '" + instructorTitle + " " +instructorFirstName +
                 " " + instructorLastName + '\'';
     }
+
+    public String displayAllInfo(){
+        return  "Name : '" + name +
+                "\nDescription : " + description +
+                "\nCredits : " + credits +
+                "\nInstructor : " + instructorTitle + " " +instructorFirstName +
+                " " + instructorLastName ;
+    }
 }

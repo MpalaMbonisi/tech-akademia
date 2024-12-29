@@ -1,6 +1,7 @@
 package com.techakademia.dao;
 
 import com.techakademia.model.Course;
+import com.techakademia.model.Student;
 import com.techakademia.util.DatabaseConnection;
 
 import java.sql.*;
@@ -76,5 +77,51 @@ public class CourseDAO {
             DatabaseConnection.closeConnection(con);
         }
         return null;
+    }
+
+    public static List<String> viewStudentsEnrolled(int courseId){
+        Connection con = DatabaseConnection.getConnection();
+        String sql = "select s.first_name, s.middle_name, s.last_name, s.email, e.date_enrolled " +
+                " from students as s " +
+                "join enrollments as e on e.student_id = s.student_id " +
+                "where e.course_id = " + courseId;
+        List<String> studentList = new ArrayList<>();
+        try {
+
+            assert con != null;
+            Statement statement = con.createStatement();
+            ResultSet students =  statement.executeQuery(sql);
+
+            while (students.next()) {
+                studentList.add(getStudentInfo(students));
+            }
+            return studentList;
+
+        } catch (SQLException e){
+
+            System.out.println("Failed to retrieve all students enrolled to the course : " + e.getMessage());
+
+        }finally {
+            DatabaseConnection.closeConnection(con);
+        }
+        return null;
+    }
+
+    private static String getStudentInfo(ResultSet studentInfo){
+        try{
+            String firstName = studentInfo.getString("first_name");
+            String middleName = studentInfo.getString("middle_name");
+            String lastName = studentInfo.getString("last_name");
+            String email = studentInfo.getString("email");
+            String dateEnrolled = studentInfo.getString("date_enrolled");
+            return "first name : " + firstName + " | middle name : " +  middleName
+                    + " | last name : " + lastName  + " | email : " + email + " | date_enrolled : " + dateEnrolled;
+
+
+        } catch(SQLException e){
+            System.out.println("Error when getting student's info : " + e.getMessage());
+            return null;
+        }
+
     }
 }

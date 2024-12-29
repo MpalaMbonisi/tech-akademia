@@ -14,4 +14,6 @@ public class CourseService {
     public List<Course> getAllCourses(){
         return CourseDAO.getAllCourses();
     }
+
+    public List<String> getEnrolledStudentByCourseId(int courseId){return CourseDAO.viewStudentsEnrolled(courseId);}
 }
