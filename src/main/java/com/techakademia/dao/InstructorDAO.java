@@ -65,4 +65,23 @@ public class InstructorDAO {
         }
     }
 
+    public static boolean isInstructorInDatabase(int instructorId){
+        Connection con = DatabaseConnection.getConnection();
+        String sql = "select * from instructors " +
+                "where instructor_id = " + instructorId + ";";
+        try{
+            assert con != null;
+            Statement statement = con.createStatement();
+            ResultSet instructor =  statement.executeQuery(sql);
+            if (instructor.next()) return true;
+
+        }catch (SQLException e){
+            System.out.println("\nSomething went wrong while searching for instructor in database : " + e.getMessage());
+        }
+        finally{
+            DatabaseConnection.closeConnection(con);
+        }
+        return false;
+    }
+
 }

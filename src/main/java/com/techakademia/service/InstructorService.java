@@ -14,4 +14,6 @@ public class InstructorService {
     public List<Instructor> getAllInstructors(){
         return InstructorDAO.getAllInstructors();
     }
+
+    public boolean isInstructorInDatabase(int instructorId){ return InstructorDAO.isInstructorInDatabase(instructorId);}
 }
