@@ -1,11 +1,27 @@
 package com.techakademia.util;
 
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 public class Helpers {
     public static String generateEmail(String lastName){
         int randomNum = (int)(Math.random() * 100);
         return lastName.toLowerCase() + randomNum + "@stu.techakademia.edu.pl";
+    }
+
+    public static Date validateDate(String dateString){
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        dateFormat.setLenient(false); // ensure that there is strict parse
+
+        try{
+            // Parse the string to a java.util.Date
+            java.util.Date utilDate = dateFormat.parse(dateString);
+            // Convert java.util.Date to java.sql.Date
+            return new Date(utilDate.getTime());
+        }catch(ParseException e){
+            return null;
+        }
     }
 
     public static Date getCurrentDate(){

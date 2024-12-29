@@ -1,14 +1,17 @@
 package com.techakademia.dao;
 
 import com.techakademia.model.Course;
+import com.techakademia.util.DatabaseConnection;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import java.sql.Connection;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class CourseDAOTest {
-
     @Test
     void testGetAllCoursesSize() {
         List<Course> courseList = CourseDAO.getAllCourses();

@@ -28,7 +28,27 @@ public class StudentDAO {
         }
     }
 
+    public static boolean isStudentInDatabase(int studentId){
+        Connection con = DatabaseConnection.getConnection();
+        String sql = "select * from students " +
+                "where student_id = " + studentId + ";";
+        try{
+            assert con != null;
+            Statement statement = con.createStatement();
+            ResultSet student =  statement.executeQuery(sql);
+            if (student.next()) return true;
+
+        }catch (SQLException e){
+            System.out.println("\nSomething went wrong while searching for student in database : " + e.getMessage());
+        }
+        finally{
+            DatabaseConnection.closeConnection(con);
+        }
+        return false;
+    }
+
     public static Student getStudentById(int studentId){
+
         Connection con = DatabaseConnection.getConnection();
         String sql = "select * from students " +
                 "where student_id = " + studentId;
@@ -47,6 +67,7 @@ public class StudentDAO {
             DatabaseConnection.closeConnection(con);
         }
         return null;
+
     }
 
     public static List<Student> getAllStudents(){
@@ -76,7 +97,7 @@ public class StudentDAO {
 
     public static List<Course> getAllStudentCourses(int studentId){
         Connection con = DatabaseConnection.getConnection();
-        String sql = "select c.course_name, c.description, c.credits, i.education_title as title, i.first_name, i.last_name\n" +
+        String sql = "select c.course_id, c.course_name, c.description, c.credits, i.education_title as title, i.first_name, i.last_name\n" +
                 "from students s\n" +
                 "join enrollments e on s.student_id = e.student_id\n" +
                 "join courses c on c.course_id = e.course_id\n" +
@@ -91,6 +112,7 @@ public class StudentDAO {
             ResultSet courses =  statement.executeQuery(sql);
 
             while (courses.next()) {
+                int courseId = courses.getInt("course_id");
                 String courseName = courses.getString("course_name");
                 String description = courses.getString("description");
                 int credits = courses.getInt("credits");
@@ -99,7 +121,7 @@ public class StudentDAO {
                 String instructorSurname = courses.getString("last_name");
 
 
-                Course course = new Course(courseName, description, credits, instructorTitle, instructorName, instructorSurname);
+                Course course = new Course(courseId, courseName, description, credits, instructorTitle, instructorName, instructorSurname);
                 coursesList.add(course);
             }
             return coursesList;
@@ -147,9 +169,54 @@ public class StudentDAO {
         return updateStudentInfo(sql);
     }
 
-    public static int updateDOB(int student_id, String dob){
-        String sql = "update students \n\tset date_of_birth = '" + dob + "'\n\t where student_id = " +student_id;
+    public static int updateDOB(int studentId, String dob){
+        String sql = "update students \n\tset date_of_birth = '" + dob + "'\n\t where student_id = " +studentId;
         return updateStudentInfo(sql);
+    }
+    private static boolean isStudentEnrolled(int studentId, int courseId){
+        Connection con = DatabaseConnection.getConnection();
+        String sql = "select * from enrollments " +
+                "where student_id = " + studentId +
+                " and course_id = " + courseId + ";";
+        try{
+            assert con != null;
+            Statement statement = con.createStatement();
+            ResultSet enrollments =  statement.executeQuery(sql);
+            if (enrollments.next()) return true;
+
+        }catch (SQLException e){
+            System.out.println("\nSomething went wrong while enrolling student : " + e.getMessage());
+        }
+        finally{
+            DatabaseConnection.closeConnection(con);
+        }
+        return false;
+    }
+
+    public static void enrolStudentById(int studentId, int courseId){
+        if(!isStudentEnrolled(studentId, courseId)) {
+
+            Connection con = DatabaseConnection.getConnection();
+            String sql = "insert into enrollments " +
+                    "(student_id, course_id, date_enrolled) " +
+                    "values (?, ?, ?)";
+            try (PreparedStatement statement = con.prepareStatement(sql)) {
+                statement.setInt(1, studentId);
+                statement.setInt(2, courseId);
+                statement.setDate(3, Helpers.getCurrentDate());
+
+                statement.executeUpdate();
+                System.out.println("\nStudent enrolled successfully....");
+
+            } catch (SQLException e) {
+                System.out.println("Failed to enrol student : " + e.getMessage());
+            } finally {
+                DatabaseConnection.closeConnection(con);
+            }
+        }
+        else {
+            System.out.println("\nStudent is already enrolled in this course!");
+        }
     }
 
     // delete student

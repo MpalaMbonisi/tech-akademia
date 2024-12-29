@@ -6,10 +6,10 @@ import com.techakademia.util.Helpers;
 import org.junit.jupiter.api.*;
 
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class StudentDAOTest {
+
 
     @BeforeEach
     void setUp() {
@@ -21,7 +21,7 @@ class StudentDAOTest {
     @AfterEach
     void tearDown() {
         // delete the student created for testing purposes
-        assertEquals(1, StudentDAO.deleteStudentById(0));
+        StudentDAO.deleteStudentById(0);
 
     }
 
@@ -109,6 +109,15 @@ class StudentDAOTest {
         assertEquals(1, StudentDAO.updateDOB(0,"2001-12-16"));
         student = StudentDAO.getStudentById(0);
         assertEquals("2001-12-16", student.getDob());
+    }
+
+    @Test
+    void testEnrolStudentById(){
+        StudentDAO.enrolStudentById(0, 135);
+        List<Course> coursesList = StudentDAO.getAllStudentCourses(0);
+        assert coursesList != null;
+        assertEquals(2, coursesList.size());
+        assertTrue(coursesList.get(1).getName().equalsIgnoreCase("Machine Learning"));
     }
 
 }

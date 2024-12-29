@@ -6,7 +6,7 @@ public class Student {
     private final String middleName;
     private final String lastName;
     private String email;
-    private final String dob;
+    private final String dob; // FORMAT yyyy-mm-dd eg. 2022-10-10
     private String date_enrolled;
 
     public String getDate_enrolled() {
@@ -56,5 +56,14 @@ public class Student {
         this.date_enrolled = date_enrolled;
     }
 
-
+    @Override
+    public String toString() {
+        return  "studentId = " + studentId +
+                ", firstName = '" + firstName + '\'' +
+                ", middleName = '" + middleName + '\'' +
+                ", lastName = '" + lastName + '\'' +
+                ", email = '" + email + '\'' +
+                ", dob = '" + dob + '\'' +
+                ", date_enrolled = '" + date_enrolled + '\'';
+    }
 }

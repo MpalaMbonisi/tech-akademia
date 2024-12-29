@@ -2,6 +2,7 @@ package com.techakademia.service;
 
 import com.techakademia.dao.StudentDAO;
 import com.techakademia.model.Student;
+import com.techakademia.model.Course;
 
 import java.util.List;
 
@@ -19,6 +20,8 @@ public class StudentService {
         return StudentDAO.getAllStudents();
     }
 
+    public List<Course> getCoursesEnrolled(int studentId){ return StudentDAO.getAllStudentCourses(studentId);}
+
     public void updateFirstName(int studentId, String firstName){
         StudentDAO.updateFirstName(studentId, firstName);
     }
@@ -27,10 +30,17 @@ public class StudentService {
         StudentDAO.updateMiddleName(studentId, middleName);
     }
 
+    public boolean isStudentInDatabase(int studentId){
+        return StudentDAO.isStudentInDatabase(studentId);
+    }
+
     public void updateLastName(int studentId, String lastName){
         StudentDAO.updateLastName(studentId, lastName);
     }
 
+    public void erolStudent(int studentId, int courseId){
+        StudentDAO.enrolStudentById(studentId, courseId);
+    }
     public void deleteStudent(int id) {
         StudentDAO.deleteStudentById(id);
     }
