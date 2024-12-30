@@ -60,4 +60,13 @@ public class Student {
                 ", email = '" + email + '\'' +
                 ", dob = '" + dob + '\'' ;
     }
+
+    public String displayAllInfo() {
+        return  "Student Id = " + studentId +
+                "\nFirst Name = '" + firstName +
+                "\nMiddle Name = '" + middleName +
+                "\nLast Name = '" + lastName +
+                "\nEmail = '" + email +
+                "\nDate of Birth = '" + dob;
+    }
 }

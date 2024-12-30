@@ -10,8 +10,8 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ManageStudentUI {
-    private static Scanner scanner = new Scanner(System.in);
-    private static StudentService studentService = new StudentService();
+    private static final Scanner scanner = new Scanner(System.in);
+    private static final StudentService studentService = new StudentService();
 
     public static void mainSection(){
 
@@ -109,7 +109,7 @@ public class ManageStudentUI {
     
     private static void viewPersonalInfo(int studentId){
         System.out.println("\n~~~~~~~~~~~~ Student Personal Info ~~~~~~~~~~~~\n");
-        System.out.println(studentService.getStudent(studentId).toString());
+        System.out.println(studentService.getStudent(studentId).displayAllInfo());
     }
     
     private static void viewCoursesEnrolled(int studentId){
