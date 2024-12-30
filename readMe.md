@@ -39,7 +39,7 @@ Tech Akademia is a Student Management System developed to showcase my skills in 
 3. Set up the PostgreSQL database:
     - Create a database named `tech_akademia`.
     - Execute the SQL scripts in the `resources/sql_files` folder to set up tables.
-4. Configure the database connection in the `application.properties` file:
+4. Configure the database connection in the `resources/database_configuration/db.properties` file:
    ```properties
    db.url=jdbc:postgresql://localhost:5432/tech_akademia
    db.username=your_username
