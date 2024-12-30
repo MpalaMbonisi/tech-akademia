@@ -7,12 +7,10 @@ This guide provides detailed steps to set up the PostgreSQL database for the Tec
 ## Prerequisites
 
 - **pgAdmin 4**: Ensure that **pgAdmin 4** is installed and connected to your PostgreSQL server.
-- **SQL Files** located in `resources/sql_test_queries`:
+- **SQL Files** located in `resources/sql_files`:
     - `create_all_tables.sql`: Creates all required tables for the application.
-    - `populate_courses.sql`: Inserts data into the `courses` table.
-    - `populate_enrollments.sql`: Inserts data into the `enrollments` table.
-    - `populate_instructors.sql`: Inserts data into the `instructors` table.
-    - `populate_all_tables.sql`: Inserts data into the `students` table.
+    - `populate_all_tables.sql`: Inserts data into the `courses` table.
+    - `test.sql` : Test for proper structure of the database.
 
 ---
 
@@ -42,15 +40,11 @@ This guide provides detailed steps to set up the PostgreSQL database for the Tec
 
 1. **Create All Tables**:
     - In the **Query Tool**, click **File > Open File...**.
-    - Navigate to `resources/sql_test_queries/create_all_tables.sql` and open it.
+    - Navigate to `resources/sql_files/create_all_tables.sql` and open it (copy it).
     - Click **Execute** (or press `F5`) to create the tables.
 
 2. **Populate Tables**:
-    - Following the table creation, load each of the following SQL files in order and execute them:
-        - `populate_instructors.sql`
-        - `populate_all_tables.sql`
-        - `populate_courses.sql`
-        - `populate_enrollments.sql`
+    - Execute the following file after: `resources/sql_files/populate_all_tables.sql`. 
 
 ---
 
@@ -60,9 +54,12 @@ This guide provides detailed steps to set up the PostgreSQL database for the Tec
 2. The following output should be displayed:
 
 | student_id | first_name | last_name | instructor_title | instructor_name | instructor_surname |
-|------------|------------|-----------|------------------|-----------------|---------------------|
-| 40000      | Anna       | Kowalski  | PhD             | Andrzej         | Kowalski           |
+|------------|------------|-----------|------------------|-----------------|--------------------|
+| 40000      | Anna       | Kowalski  | Msc              | Anna            | Nowak              |
+| 40002      | Piotr      | Nowak     | MSc              | Anna            | Nowak              |
 
 ---
 
 This setup will prepare the **Tech Akademia System** database with all necessary tables and initial data for use within the application.
+
+**Good Luck ;-)** Mbonisi Mpala
