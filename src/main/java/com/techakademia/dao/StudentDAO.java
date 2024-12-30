@@ -18,8 +18,7 @@ public class StudentDAO {
             String lastName = studentInfo.getString("last_name");
             String email = studentInfo.getString("email");
             String dob = studentInfo.getString("date_of_birth");
-            String dateEnrolled = studentInfo.getString("date_enrolled");
-            return new Student(studId, firstName,  middleName, lastName, email, dob, dateEnrolled);
+            return new Student(studId, firstName,  middleName, lastName, email, dob);
 
 
         } catch(SQLException e){
@@ -30,8 +29,8 @@ public class StudentDAO {
 
     public static boolean isStudentInDatabase(int studentId){
         Connection con = DatabaseConnection.getConnection();
-        String sql = "select * from students " +
-                "where student_id = " + studentId + ";";
+        String sql = "SELECT * FROM students " +
+                "WHERE student_id = " + studentId + ";";
         try{
             assert con != null;
             Statement statement = con.createStatement();
@@ -50,8 +49,8 @@ public class StudentDAO {
     public static Student getStudentById(int studentId){
 
         Connection con = DatabaseConnection.getConnection();
-        String sql = "select * from students " +
-                "where student_id = " + studentId;
+        String sql = "SELECT * FROM students " +
+                "WHERE student_id = " + studentId;
         try{
             assert con != null;
             Statement statement = con.createStatement();
@@ -72,7 +71,7 @@ public class StudentDAO {
 
     public static List<Student> getAllStudents(){
         Connection con = DatabaseConnection.getConnection();
-        String sql = "select * from students order by student_id asc";
+        String sql = "SELECT * FROM students ORDER BY student_id ASC";
         List<Student> studentList = new ArrayList<>();
         try {
 
@@ -97,12 +96,12 @@ public class StudentDAO {
 
     public static List<Course> getAllStudentCourses(int studentId){
         Connection con = DatabaseConnection.getConnection();
-        String sql = "select c.course_id, c.course_name, c.description, c.credits, i.education_title as title, i.first_name, i.last_name\n" +
-                "from students s\n" +
-                "join enrollments e on s.student_id = e.student_id\n" +
-                "join courses c on c.course_id = e.course_id\n" +
-                "join instructors i on c.instructor_id = i.instructor_id\n" +
-                "where s.student_id = " + studentId;
+        String sql = "SELECT c.course_id, c.course_name, c.description, c.credits, i.education_title as title, i.first_name, i.last_name\n" +
+                "FROM students s\n" +
+                "JOIN enrollments e ON s.student_id = e.student_id\n" +
+                "JOIN courses c ON c.course_id = e.course_id\n" +
+                "JOIN instructors i on c.instructor_id = i.instructor_id\n" +
+                "WHERE s.student_id = " + studentId;
 
         List<Course> coursesList = new ArrayList<>();
         try {
@@ -153,31 +152,31 @@ public class StudentDAO {
     }
 
     public static int updateFirstName(int student_id, String firstName){
-        String sql = "update students \n\tset first_name = '" + firstName + "'\n\t where student_id = " +student_id;
+        String sql = "UPDATE students \n\tSET first_name = '" + firstName + "'\n\t WHERE student_id = " +student_id;
         return updateStudentInfo(sql);
     }
 
     public static int updateMiddleName(int student_id, String middleName){
         String sql;
-        if (middleName == null) sql = "update students \n\tset middle_name = null\n\t where student_id = " +student_id;
-        else sql = "update students \n\tset middle_name = '" + middleName + "'\n\t where student_id = " +student_id;
+        if (middleName == null) sql = "UPDATE students \n\tSET middle_name = null\n\t WHERE student_id = " +student_id;
+        else sql = "UPDATE students \n\tSET middle_name = '" + middleName + "'\n\t WHERE student_id = " +student_id;
         return updateStudentInfo(sql);
     }
     public static int updateLastName(int student_id, String lastName){
-        String sql = "update students \n\tset last_name = '" + lastName + "', email = '" + Helpers.generateEmail(lastName) +
-                "'\n\t where student_id = " +student_id;
+        String sql = "UPDATE students \n\tSET last_name = '" + lastName + "', email = '" + Helpers.generateEmail(lastName) +
+                "'\n\t WHERE student_id = " +student_id;
         return updateStudentInfo(sql);
     }
 
     public static int updateDOB(int studentId, String dob){
-        String sql = "update students \n\tset date_of_birth = '" + dob + "'\n\t where student_id = " +studentId;
+        String sql = "UPDATE students \n\tSET date_of_birth = '" + dob + "'\n\t WHERE student_id = " +studentId;
         return updateStudentInfo(sql);
     }
     private static boolean isStudentEnrolled(int studentId, int courseId){
         Connection con = DatabaseConnection.getConnection();
-        String sql = "select * from enrollments " +
-                "where student_id = " + studentId +
-                " and course_id = " + courseId + ";";
+        String sql = "SELECT * FROM enrollments " +
+                "WHERE student_id = " + studentId +
+                " AND course_id = " + courseId + ";";
         try{
             assert con != null;
             Statement statement = con.createStatement();
@@ -197,9 +196,9 @@ public class StudentDAO {
         if(!isStudentEnrolled(studentId, courseId)) {
 
             Connection con = DatabaseConnection.getConnection();
-            String sql = "insert into enrollments " +
+            String sql = "INSERT INTO enrollments " +
                     "(student_id, course_id, date_enrolled) " +
-                    "values (?, ?, ?)";
+                    "VALUES (?, ?, ?)";
             try (PreparedStatement statement = con.prepareStatement(sql)) {
                 statement.setInt(1, studentId);
                 statement.setInt(2, courseId);
@@ -222,7 +221,7 @@ public class StudentDAO {
     // delete student
     public static int deleteStudentById(int studentId){
         Connection con = DatabaseConnection.getConnection();
-        String sql = "delete from students where student_id = " + studentId;
+        String sql = "DELETE FROM students WHERE student_id = " + studentId;
         try{
             assert con != null;
             Statement statement = con.createStatement();
@@ -239,21 +238,20 @@ public class StudentDAO {
 
     public static void addStudent(Student student){
         Connection con = DatabaseConnection.getConnection();
-        String sql = "insert into students " +
-                "(first_name, middle_name, last_name, email, date_of_birth, date_enrolled) " +
-                "values (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO students " +
+                "(first_name, middle_name, last_name, email, date_of_birth) " +
+                "VALUES (?, ?, ?, ?, ?)";
         try(PreparedStatement statement = con.prepareStatement(sql)){
             statement.setString(1, student.getFirstName());
             statement.setString(2, student.getMiddleName());
             statement.setString(3, student.getLastName());
             statement.setString(4, student.getEmail());
             statement.setDate(5, Date.valueOf(student.getDob()));
-            statement.setDate(6, Helpers.getCurrentDate());
 
             statement.executeUpdate();
-            System.out.println("New student added successfully....\n");
+            System.out.println("\nNew student added successfully...");
         }catch (SQLException e) {
-            System.out.println("Failed to add new student : " + e.getMessage());
+            System.out.println("\nFailed to add new student : " + e.getMessage());
         }
         finally{
             DatabaseConnection.closeConnection(con);

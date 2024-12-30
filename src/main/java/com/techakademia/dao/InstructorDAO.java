@@ -26,7 +26,7 @@ public class InstructorDAO {
     }
     public static List<Instructor> getAllInstructors(){
         Connection con = DatabaseConnection.getConnection();
-        String sql = "select * from instructors order by instructor_id asc";
+        String sql = "SELECT * FROM instructors ORDER BY instructor_id ASC";
         List<Instructor> instructorsList = new ArrayList<>();
         try{
             Statement statement = con.createStatement();
@@ -38,7 +38,7 @@ public class InstructorDAO {
             return instructorsList;
 
         }catch (SQLException e){
-            System.out.println("Failed to retrieve all instructors : " + e.getMessage());
+            System.out.println("\nFailed to retrieve all instructors : " + e.getMessage());
             return null;
         }
         finally{
@@ -48,7 +48,7 @@ public class InstructorDAO {
 
     public static Instructor getInstructorById(int instructorId){
         Connection con = DatabaseConnection.getConnection();
-        String sql = "select * from instructors where instructor_id = " + instructorId;
+        String sql = "SELECT * FROM instructors WHERE instructor_id = " + instructorId;
         try{
 
             assert con != null;
@@ -58,7 +58,7 @@ public class InstructorDAO {
             return getInfo(instructorInfo);
 
         }catch (SQLException e){
-            System.out.println("Failed to retrieve instructor by id : " + e.getMessage());
+            System.out.println("\nFailed to retrieve instructor by id : " + e.getMessage());
             return null;
         }finally{
             DatabaseConnection.closeConnection(con);
@@ -67,8 +67,8 @@ public class InstructorDAO {
 
     public static boolean isInstructorInDatabase(int instructorId){
         Connection con = DatabaseConnection.getConnection();
-        String sql = "select * from instructors " +
-                "where instructor_id = " + instructorId + ";";
+        String sql = "SELECT * FROM instructors " +
+                "WHERE instructor_id = " + instructorId + ";";
         try{
             assert con != null;
             Statement statement = con.createStatement();

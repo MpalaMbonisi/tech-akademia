@@ -23,16 +23,16 @@ public class CourseDAO {
             return new Course(courseId, courseName, description, credits, instructorTitle,instructorName, instructorSurname);
 
         } catch (SQLException e){
-            System.out.println("Error when getting course info : " + e.getMessage());
+            System.out.println("\nError when getting course info : " + e.getMessage());
             return null;
         }
     }
 
     public static List<Course> getAllCourses(){
         Connection con = DatabaseConnection.getConnection();
-        String sql = "select c.course_id, c.course_name, c.description, c.credits, i.first_name, i.last_name, i.education_title " +
-                " from courses as c " +
-                "join instructors as i on c.instructor_id = i.instructor_id";
+        String sql = "SELECT c.course_id, c.course_name, c.description, c.credits, i.first_name, i.last_name, i.education_title " +
+                " FROM courses AS c " +
+                " JOIN instructors AS i ON c.instructor_id = i.instructor_id";
         List<Course> coursesList = new ArrayList<>();
         try {
 
@@ -47,7 +47,7 @@ public class CourseDAO {
 
         } catch (SQLException e){
 
-            System.out.println("Failed to retrieve all courses : " + e.getMessage());
+            System.out.println("\nFailed to retrieve all courses : " + e.getMessage());
 
         }finally {
             DatabaseConnection.closeConnection(con);
@@ -57,10 +57,10 @@ public class CourseDAO {
 
     public static Course getCourseById(int courseId){
         Connection con = DatabaseConnection.getConnection();
-        String sql = "select c.course_name, c.description, c.credits, i.first_name, i.last_name, i.education_title " +
-                " from courses as c " +
-                "join instructors as i on c.instructor_id = i.instructor_id \n" +
-                "where c.course_id = " + courseId;
+        String sql = "SELECT c.course_id, c.course_name, c.description, c.credits, i.first_name, i.last_name, i.education_title " +
+                " FROM courses AS c " +
+                " JOIN instructors AS i ON c.instructor_id = i.instructor_id \n" +
+                " WHERE c.course_id = " + courseId;
 
         try {
             assert con != null;
@@ -71,7 +71,7 @@ public class CourseDAO {
 
         } catch (SQLException e){
 
-            System.out.println("Failed to retrieve course by id : " + e.getMessage());
+            System.out.println("\nFailed to retrieve course by id : " + e.getMessage());
 
         }finally {
             DatabaseConnection.closeConnection(con);
@@ -81,10 +81,10 @@ public class CourseDAO {
 
     public static List<String> viewStudentsEnrolled(int courseId){
         Connection con = DatabaseConnection.getConnection();
-        String sql = "select s.first_name, s.middle_name, s.last_name, s.email, e.date_enrolled " +
-                " from students as s " +
-                "join enrollments as e on e.student_id = s.student_id " +
-                "where e.course_id = " + courseId;
+        String sql = "SELECT s.first_name, s.middle_name, s.last_name, s.email, e.date_enrolled " +
+                " FROM students AS s " +
+                "JOIN enrollments AS e on e.student_id = s.student_id " +
+                "WHERE e.course_id = " + courseId;
         List<String> studentList = new ArrayList<>();
         try {
 
@@ -99,7 +99,7 @@ public class CourseDAO {
 
         } catch (SQLException e){
 
-            System.out.println("Failed to retrieve all students enrolled to the course : " + e.getMessage());
+            System.out.println("\nFailed to retrieve all students enrolled to the course : " + e.getMessage());
 
         }finally {
             DatabaseConnection.closeConnection(con);
@@ -119,7 +119,7 @@ public class CourseDAO {
 
 
         } catch(SQLException e){
-            System.out.println("Error when getting student's info : " + e.getMessage());
+            System.out.println("\nError when getting student's info : " + e.getMessage());
             return null;
         }
 

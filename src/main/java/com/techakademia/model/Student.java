@@ -7,11 +7,7 @@ public class Student {
     private final String lastName;
     private String email;
     private final String dob; // FORMAT yyyy-mm-dd eg. 2022-10-10
-    private String date_enrolled;
 
-    public String getDate_enrolled() {
-        return date_enrolled;
-    }
 
     public int getStudentId() {
         return studentId;
@@ -46,14 +42,13 @@ public class Student {
         this.dob = dob;
     }
 
-    public Student(int studentId, String firstName, String middleName, String lastName, String email, String dob, String date_enrolled) {
+    public Student(int studentId, String firstName, String middleName, String lastName, String email, String dob) {
         this.studentId = studentId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.middleName = middleName;
         this.email = email;
         this.dob = dob;
-        this.date_enrolled = date_enrolled;
     }
 
     @Override
@@ -63,7 +58,6 @@ public class Student {
                 ", middleName = '" + middleName + '\'' +
                 ", lastName = '" + lastName + '\'' +
                 ", email = '" + email + '\'' +
-                ", dob = '" + dob + '\'' +
-                ", date_enrolled = '" + date_enrolled + '\'';
+                ", dob = '" + dob + '\'' ;
     }
 }

@@ -32,9 +32,9 @@ public class Helpers {
 
     public static int addTestStudent() {
         Connection con = DatabaseConnection.getConnection();
-        String sql = "insert into students (student_id, first_name, middle_name, last_name, email, date_of_birth, date_enrolled)" +
-                "values " +
-                "   (0, 'Mbonisi', null, 'Mpala', 'mmpala01@stu.techakademia.edu.pl', '2001-12-16', '2022-10-01')";
+        String sql = "INSERT INTO students (student_id, first_name, middle_name, last_name, email, date_of_birth)" +
+                "VALUES " +
+                "   (0, 'Mbonisi', null, 'Mpala', 'mmpala01@stu.techakademia.edu.pl', '2001-12-16')";
         try{
             assert con != null;
             Statement statement = con.createStatement();
@@ -52,7 +52,7 @@ public class Helpers {
     public static int enrolTestStudent() {
         Connection con = DatabaseConnection.getConnection();
         String sql = "insert into enrollments(enrolment_id, student_id, course_id, date_enrolled)" +
-                "values(0, 0, 125, '2022-10-10')";
+                "values(0, 0, 130, '2022-10-10')";
         try{
             assert con != null;
             Statement statement = con.createStatement();

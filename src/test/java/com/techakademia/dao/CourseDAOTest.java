@@ -46,8 +46,8 @@ class CourseDAOTest {
     }
 
     @Test
-    void testGetCourseByIdCourse() {
-        Course course = CourseDAO.getCourseById(140);
+    void testGetCourseById() {
+        Course course = CourseDAO.getCourseById(160);
         assertEquals("Network Fundamentals", course.getName());
         assertEquals("Fundamentals of computer networks and internet technologies.", course.getDescription());
         assertEquals(3, course.getCredits());

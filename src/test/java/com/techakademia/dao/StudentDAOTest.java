@@ -35,7 +35,6 @@ class StudentDAOTest {
         assertEquals("Mpala", testStudent.getLastName());
         assertEquals("mmpala01@stu.techakademia.edu.pl", testStudent.getEmail());
         assertEquals("2001-12-16", testStudent.getDob());
-        assertEquals("2022-10-01", testStudent.getDate_enrolled());
     }
 
     @Test
@@ -49,7 +48,6 @@ class StudentDAOTest {
         assertEquals("Mpala", student.getLastName());
         assertEquals("mmpala01@stu.techakademia.edu.pl", student.getEmail());
         assertEquals("2001-12-16", student.getDob());
-        assertEquals("2022-10-01", student.getDate_enrolled());
     }
 
     @Test
@@ -113,7 +111,7 @@ class StudentDAOTest {
 
     @Test
     void testEnrolStudentById(){
-        StudentDAO.enrolStudentById(0, 135);
+        StudentDAO.enrolStudentById(0, 150);
         List<Course> coursesList = StudentDAO.getAllStudentCourses(0);
         assert coursesList != null;
         assertEquals(2, coursesList.size());

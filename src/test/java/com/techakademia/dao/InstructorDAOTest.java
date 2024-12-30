@@ -25,7 +25,7 @@ class InstructorDAOTest {
         List<Instructor> instructorList = InstructorDAO.getAllInstructors();
         assert instructorList != null;
         Instructor instructor = instructorList.get(0);
-        assertEquals(10000, instructor.instructorId());
+        assertEquals(1000, instructor.instructorId());
         assertEquals("Andrzej", instructor.firstName());
         assertEquals("Piotr", instructor.middleName());
         assertEquals("Kowalski", instructor.lastName());
@@ -38,7 +38,7 @@ class InstructorDAOTest {
         List<Instructor> instructorList = InstructorDAO.getAllInstructors();
         assert instructorList != null;
         Instructor instructor = instructorList.get(9);
-        assertEquals(10045, instructor.instructorId());
+        assertEquals(1045, instructor.instructorId());
         assertEquals("Magdalena", instructor.firstName());
         assertEquals("Agnieszka", instructor.middleName());
         assertEquals("Szymańska", instructor.lastName());
@@ -48,7 +48,7 @@ class InstructorDAOTest {
 
     @Test
     void testGetInstructorById(){
-        Instructor instructor = InstructorDAO.getInstructorById(10020);
+        Instructor instructor = InstructorDAO.getInstructorById(1020);
         assert instructor != null;
         assertEquals("Tomasz", instructor.firstName());
         assertEquals("Krzysztof", instructor.middleName());

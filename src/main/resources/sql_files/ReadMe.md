@@ -12,7 +12,7 @@ This guide provides detailed steps to set up the PostgreSQL database for the Tec
     - `populate_courses.sql`: Inserts data into the `courses` table.
     - `populate_enrollments.sql`: Inserts data into the `enrollments` table.
     - `populate_instructors.sql`: Inserts data into the `instructors` table.
-    - `populate_students.sql`: Inserts data into the `students` table.
+    - `populate_all_tables.sql`: Inserts data into the `students` table.
 
 ---
 
@@ -48,7 +48,7 @@ This guide provides detailed steps to set up the PostgreSQL database for the Tec
 2. **Populate Tables**:
     - Following the table creation, load each of the following SQL files in order and execute them:
         - `populate_instructors.sql`
-        - `populate_students.sql`
+        - `populate_all_tables.sql`
         - `populate_courses.sql`
         - `populate_enrollments.sql`
 
